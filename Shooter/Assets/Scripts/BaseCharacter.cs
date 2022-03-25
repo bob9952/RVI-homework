@@ -20,5 +20,4 @@ public class BaseCharacter : MonoBehaviour, IDamageable
             Die();
         }
     }
-
 }
