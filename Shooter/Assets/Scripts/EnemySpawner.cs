@@ -37,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = newEnemyObject.GetComponent<Enemy>();
         // how to attach enemy to player ?
         enemy.player = GameObject.Find("Player");
-        return null;
+        return newEnemyObject;
     }
 
     public void Awake()
