@@ -8,15 +8,31 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> spawnedEnemies;
     public GameObject enemyPrefab;
     public List<Vector3> spawnPoints;
-    public int numberOfEnemies;
+    public int spawnTime;
+    public int maxEnemyCount;
+    public int enemyCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < numberOfEnemies; i++)
+        StartCoroutine(SpawnCorutine(spawnTime));
+    }
+
+    public IEnumerator SpawnCorutine(int spawnTime)
+    {
+        while (true)
         {
-            GameObject newEnemy = SpawnEnemy();
-            spawnedEnemies.Add(newEnemy);
+            GameObject instantiatedEnemy = SpawnEnemy();
+
+            spawnedEnemies.Add(instantiatedEnemy);
+            enemyCount++;
+
+            if (enemyCount >= maxEnemyCount)
+            {
+                yield break;
+            }
+
+            yield return new WaitForSecondsRealtime(spawnTime);
         }
     }
 
@@ -43,5 +59,6 @@ public class EnemySpawner : MonoBehaviour
     public void Awake()
     {
         spawnedEnemies = new List<GameObject>();
+        enemyCount = 0;
     }
 }

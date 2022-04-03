@@ -23,4 +23,17 @@ public class Bullet : MonoBehaviour
         }   
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other != null)
+        {
+            Enemy enemyComp = other.gameObject.GetComponent<Enemy>();
+
+            if(enemyComp != null)
+            {
+                enemyComp.TakeDamage(damage);
+            }
+
+        }
+    }
 }
